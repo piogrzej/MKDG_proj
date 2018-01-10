@@ -33,8 +33,20 @@ public class GLCMparser {
     private float entropy=0;
     private float mean=0;
     
+    private void resetValues()
+    {
+        this.energy = 0.0f;
+        this.contrast = 0.0f;
+        this.homogenity = 0.0f;
+        this.IDM = 0.0f;
+        this.energy = 0.0f;
+        this.mean = 0.0f;
+    }
+    
     public void pars()
     {
+        this.resetValues();
+        
         Mat gl = Mat.zeros(x_size, y_size, CvType.CV_64F);
         Mat glt = gl.clone();
         
