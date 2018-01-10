@@ -186,10 +186,13 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
        glcm.setY_size(50);
        glcm.setImg(imageMat);
        glcm.pars();
-       GlcmAttrs attrs = new GlcmAttrs();
+       GlcmAttrs attrs = new GlcmAttrs(glcm.getEnergy(), glcm.getContrast(), glcm.getHomogenity(), glcm.getIDM(), glcm.getEntropy(), glcm.getMean());
        System.out.println(glcm.getContrast() + " " + glcm.getEnergy() + " " + glcm.getEntropy() + " " + glcm.getHomogenity());
+       
        if(checkbox1.getState())
            AddKnownObject(attrs);
+       else
+           Classify(attrs);
     }
 
     @Override
@@ -216,5 +219,34 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
         String key = jTextField1.getText();
         knownClasses.putIfAbsent(key, new ArrayList<>());
         knownClasses.get(key).add(attrs);
+    }
+
+    private void Classify(GlcmAttrs attrs) {
+        String minClassName = "";
+        float minDistance = Float.MAX_VALUE;
+        for (Map.Entry<String, List<GlcmAttrs>> entry : knownClasses.entrySet()) {
+            String className = entry.getKey();
+            List<GlcmAttrs> value = entry.getValue();
+            for(GlcmAttrs classAttr : value) {
+                float distance = Distance(attrs, classAttr);
+                if(distance < minDistance) {
+                    minClassName = className;
+                    minDistance = distance;
+                }
+            }            
+        }
+        System.out.println(minClassName);
+    }
+    
+    private float Distance(GlcmAttrs attrs1, GlcmAttrs attrs2) {
+        ArrayList<Float> attrsA = attrs1.getValuesList();
+        ArrayList<Float> attrsB = attrs2.getValuesList();
+        float distance = 0;
+        for(int i=0; i<attrsA.size(); i++) {
+            float a = attrsA.get(i);
+            float b = attrsB.get(i);
+            distance += b*b - a*a;
+        }
+        return (float) Math.sqrt(distance);
     }
 }
