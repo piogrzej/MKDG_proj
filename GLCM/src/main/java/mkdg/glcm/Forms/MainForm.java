@@ -46,6 +46,15 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
         img = ImageLoader.ToBufferedImage(imageMat);//ImageIO.read(file);
         jLabel1.setIcon(new ImageIcon(img.getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_FAST)));
         knownClasses.clear();
+        //sizeLabel.setText("Image size: "+img.getWidth() + "x" + img.getHeight());
+        
+        //this.contrastLabel.setText("");
+        //this.energyLabel.setText("");
+        //this.entropyLabel.setText("");
+        //this.homogenityLabel.setText("");
+        //this.idmLabel.setText("");
+        //this.meanLabel.setText("");
+        
     }
 
     /**
@@ -96,7 +105,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
                         .addComponent(jTextField1)
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(checkbox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(251, Short.MAX_VALUE))
+                .addContainerGap(205, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,8 +198,14 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
        glcm.setImg(imageMat);
        glcm.pars();
        GlcmAttrs attrs = new GlcmAttrs(glcm.getEnergy(), glcm.getContrast(), glcm.getHomogenity(), glcm.getIDM(), glcm.getEntropy(), glcm.getMean());
-       System.out.println(glcm.getContrast() + " " + glcm.getEnergy() + " " + glcm.getEntropy() + " " + glcm.getHomogenity());
        
+       //this.contrastLabel.setText(attrs.getContrastAsString());
+       //this.energyLabel.setText(attrs.getEnergyAsString());
+       //this.entropyLabel.setText(attrs.getEntropyAsString());
+       //this.homogenityLabel.setText(attrs.getHomogenityAsString());
+       //this.idmLabel.setText(attrs.getIDMAsString());
+       //this.meanLabel.setText(attrs.getMeanAsString());
+              
        if(checkbox1.getState())
            AddKnownObject(attrs);
        else

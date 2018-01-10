@@ -25,8 +25,24 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
+<<<<<<< HEAD
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="idmLabel" pref="588" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="homogenityLabel" alignment="0" max="32767" attributes="0"/>
+                      <Component id="entropyLabel" alignment="0" max="32767" attributes="0"/>
+                      <Component id="energyLabel" alignment="0" max="32767" attributes="0"/>
+                      <Component id="contrastLabel" alignment="0" max="32767" attributes="0"/>
+                      <Component id="sizeLabel" alignment="1" max="32767" attributes="0"/>
+                      <Component id="jLabel1" alignment="1" pref="588" max="32767" attributes="0"/>
+                      <Component id="meanLabel" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+=======
               <Component id="jLabel1" min="-2" pref="542" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+>>>>>>> fccded5ff81d635a8c0e764a75281ad394085882
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jButton1" max="32767" attributes="0"/>
@@ -35,7 +51,7 @@
                   </Group>
                   <Component id="checkbox1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="251" max="32767" attributes="0"/>
+              <EmptySpace pref="205" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -55,7 +71,25 @@
                       <Component id="checkbox1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
+<<<<<<< HEAD
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="sizeLabel" min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="contrastLabel" min="-2" pref="18" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="energyLabel" min="-2" pref="18" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="entropyLabel" min="-2" pref="18" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="homogenityLabel" min="-2" pref="18" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="idmLabel" min="-2" pref="18" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="meanLabel" min="-2" pref="18" max="-2" attributes="0"/>
+              <EmptySpace pref="17" max="32767" attributes="0"/>
+=======
               <EmptySpace pref="131" max="32767" attributes="0"/>
+>>>>>>> fccded5ff81d635a8c0e764a75281ad394085882
           </Group>
       </Group>
     </DimensionLayout>
@@ -86,10 +120,34 @@
         <Property name="label" type="java.lang.String" value="Adding Known Set"/>
       </Properties>
     </Component>
+<<<<<<< HEAD
+    <Component class="java.awt.Label" name="sizeLabel">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Dialog" size="12" style="1"/>
+        </Property>
+      </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="sizeLabel"/>
+      </AccessibilityProperties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="contrastLabel">
+    </Component>
+    <Component class="javax.swing.JLabel" name="energyLabel">
+    </Component>
+    <Component class="javax.swing.JLabel" name="entropyLabel">
+    </Component>
+    <Component class="javax.swing.JLabel" name="homogenityLabel">
+    </Component>
+    <Component class="javax.swing.JLabel" name="idmLabel">
+    </Component>
+    <Component class="javax.swing.JLabel" name="meanLabel">
+=======
     <Component class="mkdg.glcm.JLabelMouse" name="jLabel1">
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel1"/>
       </Properties>
+>>>>>>> fccded5ff81d635a8c0e764a75281ad394085882
     </Component>
   </SubComponents>
 </Form>
