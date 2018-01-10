@@ -38,6 +38,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
         initComponents();
         jLabel1.addMouseListener((MouseListener) this);
         jLabel1.addMouseMotionListener(jLabel1);
+        jLabel1.setMarkerSize(100, 100);
     }
     
     private void loadImage(File file) {                            

@@ -25,6 +25,11 @@ public class JLabelMouse extends JLabel implements MouseMotionListener {
     private int sx = 100;
     private int sy = 100;
     
+    public void setMarkerSize(int x, int y) {
+        sx = x;
+        sy = y;
+    }
+    
 
 
     @Override
@@ -35,15 +40,15 @@ public class JLabelMouse extends JLabel implements MouseMotionListener {
     public void mouseMoved(MouseEvent e) {
         mx = e.getX();
         my = e.getY();
-        invalidate();
+        repaint();
     }
     
-    public void paint(Graphics g)
-    {
-        super.paint(g);
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
         g.setColor(Color.ORANGE);
         g.setColor(Color.red);
-        g.drawRect(mx, my, sx, sy);// Recipe's Name        
+        g.drawRect(mx-sx/2, my-sy/2, sx, sy);// Recipe's Name        
         Graphics2D g2 = (Graphics2D) g;
     }
 }
