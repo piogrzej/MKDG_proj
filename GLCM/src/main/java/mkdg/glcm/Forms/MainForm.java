@@ -46,6 +46,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
         img = ImageLoader.ToBufferedImage(imageMat);//ImageIO.read(file);
         jLabel1.setIcon(new ImageIcon(img.getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_FAST)));
         knownClasses.clear();
+        jLabel1.setImageSize(img.getWidth(), img.getHeight());
         //sizeLabel.setText("Image size: "+img.getWidth() + "x" + img.getHeight());
         
         //this.contrastLabel.setText("");

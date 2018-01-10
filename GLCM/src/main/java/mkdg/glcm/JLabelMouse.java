@@ -25,7 +25,9 @@ public class JLabelMouse extends JLabel implements MouseMotionListener {
     private int sx = 100;
     private int sy = 100;
     private int imageSizeX = 1;
-    private int imageSizeY = 1;
+    private int imageSizeY = 1;    
+    private float ratiox = 1.f;
+    private float ratioy = 1.f;
     
     public void setMarkerSize(int x, int y) {
         sx = x;
@@ -35,6 +37,8 @@ public class JLabelMouse extends JLabel implements MouseMotionListener {
     public void setImageSize(int x, int y) {
         imageSizeX = x;
         imageSizeY = y;
+        ratiox = imageSizeX/this.getWidth();
+        ratioy = imageSizeY/this.getHeight();
     }
     
 
@@ -55,7 +59,9 @@ public class JLabelMouse extends JLabel implements MouseMotionListener {
         super.paintComponent(g);
         g.setColor(Color.ORANGE);
         g.setColor(Color.red);
-        g.drawRect(mx-sx/2, my-sy/2, sx, sy);// Recipe's Name        
+        
+        
+        g.drawRect((int) ((mx*ratiox - sx/2)/ratiox), (int)((my*ratioy - sy/2)/ratioy), (int)(sx/ratiox), (int)(sy/ratioy));
         Graphics2D g2 = (Graphics2D) g;
     }
 }
