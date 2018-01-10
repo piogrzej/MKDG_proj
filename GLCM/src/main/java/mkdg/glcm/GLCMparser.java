@@ -16,6 +16,8 @@ import org.opencv.core.Scalar;
  */
 public class GLCMparser {
     
+    private static final int GRAY_LEVELS = 256;
+    
     private Mat img;//obrazek
     
     private int x_size;//rozmiar obszaru w osi X
@@ -47,7 +49,7 @@ public class GLCMparser {
     {
         this.resetValues();
         
-        Mat gl = Mat.zeros(x_size, y_size, CvType.CV_64F);
+        Mat gl = Mat.zeros(GRAY_LEVELS, GRAY_LEVELS, CvType.CV_64F);
         Mat glt = gl.clone();
         
         int rows = y_size, cols = x_size;
