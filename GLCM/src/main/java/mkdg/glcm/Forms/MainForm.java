@@ -37,6 +37,8 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
     public MainForm() {
         initComponents();
         jLabel1.addMouseListener((MouseListener) this);
+        jLabel1.addMouseMotionListener(jLabel1);
+        jLabel1.setMarkerSize(100, 100);
     }
     
     private void loadImage(File file) {                            
@@ -44,14 +46,14 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
         img = ImageLoader.ToBufferedImage(imageMat);//ImageIO.read(file);
         jLabel1.setIcon(new ImageIcon(img.getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_FAST)));
         knownClasses.clear();
-        sizeLabel.setText("Image size: "+img.getWidth() + "x" + img.getHeight());
+        //sizeLabel.setText("Image size: "+img.getWidth() + "x" + img.getHeight());
         
-        this.contrastLabel.setText("");
-        this.energyLabel.setText("");
-        this.entropyLabel.setText("");
-        this.homogenityLabel.setText("");
-        this.idmLabel.setText("");
-        this.meanLabel.setText("");
+        //this.contrastLabel.setText("");
+        //this.energyLabel.setText("");
+        //this.entropyLabel.setText("");
+        //this.homogenityLabel.setText("");
+        //this.idmLabel.setText("");
+        //this.meanLabel.setText("");
         
     }
 
@@ -64,22 +66,13 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         checkbox1 = new java.awt.Checkbox();
-        sizeLabel = new java.awt.Label();
-        contrastLabel = new javax.swing.JLabel();
-        energyLabel = new javax.swing.JLabel();
-        entropyLabel = new javax.swing.JLabel();
-        homogenityLabel = new javax.swing.JLabel();
-        idmLabel = new javax.swing.JLabel();
-        meanLabel = new javax.swing.JLabel();
+        jLabel1 = new mkdg.glcm.JLabelMouse();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jButton1.setText("Load Image");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -96,7 +89,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
 
         checkbox1.setLabel("Adding Known Set");
 
-        sizeLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -104,17 +97,8 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(idmLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(homogenityLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(entropyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(energyLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(contrastLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(sizeLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 588, Short.MAX_VALUE)
-                        .addComponent(meanLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -128,6 +112,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -135,26 +120,9 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
                         .addGap(2, 2, 2)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(checkbox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sizeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contrastLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(energyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(entropyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(homogenityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(idmLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(meanLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                        .addComponent(checkbox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
-
-        sizeLabel.getAccessibleContext().setAccessibleName("sizeLabel");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -213,19 +181,12 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Checkbox checkbox1;
-    private javax.swing.JLabel contrastLabel;
-    private javax.swing.JLabel energyLabel;
-    private javax.swing.JLabel entropyLabel;
-    private javax.swing.JLabel homogenityLabel;
-    private javax.swing.JLabel idmLabel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private mkdg.glcm.JLabelMouse jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JLabel meanLabel;
-    private java.awt.Label sizeLabel;
     // End of variables declaration//GEN-END:variables
-
+    
     @Override
     public void mouseClicked(MouseEvent e) {
        System.out.println(e.getX() + " " + e.getY() + " " + e.getX()*imageMat.width()/jLabel1.getWidth() + " " + e.getY()*imageMat.height()/jLabel1.getHeight());
@@ -238,12 +199,12 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
        glcm.pars();
        GlcmAttrs attrs = new GlcmAttrs(glcm.getEnergy(), glcm.getContrast(), glcm.getHomogenity(), glcm.getIDM(), glcm.getEntropy(), glcm.getMean());
        
-       this.contrastLabel.setText(attrs.getContrastAsString());
-       this.energyLabel.setText(attrs.getEnergyAsString());
-       this.entropyLabel.setText(attrs.getEntropyAsString());
-       this.homogenityLabel.setText(attrs.getHomogenityAsString());
-       this.idmLabel.setText(attrs.getIDMAsString());
-       this.meanLabel.setText(attrs.getMeanAsString());
+       //this.contrastLabel.setText(attrs.getContrastAsString());
+       //this.energyLabel.setText(attrs.getEnergyAsString());
+       //this.entropyLabel.setText(attrs.getEntropyAsString());
+       //this.homogenityLabel.setText(attrs.getHomogenityAsString());
+       //this.idmLabel.setText(attrs.getIDMAsString());
+       //this.meanLabel.setText(attrs.getMeanAsString());
               
        if(checkbox1.getState())
            AddKnownObject(attrs);

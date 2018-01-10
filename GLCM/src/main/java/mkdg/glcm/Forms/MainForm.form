@@ -25,6 +25,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
+<<<<<<< HEAD
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Component id="idmLabel" pref="588" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -38,6 +39,10 @@
                   </Group>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
+=======
+              <Component id="jLabel1" min="-2" pref="542" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+>>>>>>> fccded5ff81d635a8c0e764a75281ad394085882
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jButton1" max="32767" attributes="0"/>
@@ -55,6 +60,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel1" min="-2" pref="517" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -64,8 +70,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="checkbox1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jLabel1" min="-2" pref="445" max="-2" attributes="0"/>
               </Group>
+<<<<<<< HEAD
               <EmptySpace max="-2" attributes="0"/>
               <Component id="sizeLabel" min="-2" pref="28" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -81,20 +87,14 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="meanLabel" min="-2" pref="18" max="-2" attributes="0"/>
               <EmptySpace pref="17" max="32767" attributes="0"/>
+=======
+              <EmptySpace pref="131" max="32767" attributes="0"/>
+>>>>>>> fccded5ff81d635a8c0e764a75281ad394085882
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="jLabel1">
-      <Properties>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-            <LineBorder/>
-          </Border>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
         <Property name="text" type="java.lang.String" value="Load Image"/>
@@ -120,6 +120,7 @@
         <Property name="label" type="java.lang.String" value="Adding Known Set"/>
       </Properties>
     </Component>
+<<<<<<< HEAD
     <Component class="java.awt.Label" name="sizeLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -141,6 +142,12 @@
     <Component class="javax.swing.JLabel" name="idmLabel">
     </Component>
     <Component class="javax.swing.JLabel" name="meanLabel">
+=======
+    <Component class="mkdg.glcm.JLabelMouse" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+>>>>>>> fccded5ff81d635a8c0e764a75281ad394085882
     </Component>
   </SubComponents>
 </Form>
