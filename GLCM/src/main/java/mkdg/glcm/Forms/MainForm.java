@@ -150,12 +150,12 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-       System.out.println(e.getX());
+       System.out.println(e.getX() + " " + e.getY() + " " + e.getX()*imageMat.width()/jLabel1.getWidth() + " " + e.getY()*imageMat.height()/jLabel1.getHeight());
        GLCMparser glcm = new GLCMparser();
-       glcm.setX_poss(e.getX());
-       glcm.setY_poss(e.getY());
-       glcm.setX_size(15);
-       glcm.setY_size(15);
+       glcm.setX_poss(e.getX()*imageMat.width()/jLabel1.getWidth());
+       glcm.setY_poss(e.getY()*imageMat.height()/jLabel1.getHeight());
+       glcm.setX_size(50);
+       glcm.setY_size(50);
        glcm.setImg(imageMat);
        glcm.pars();
        System.out.println(glcm.getContrast() + " " + glcm.getEnergy() + " " + glcm.getEntropy() + " " + glcm.getHomogenity());
