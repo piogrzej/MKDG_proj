@@ -17,6 +17,18 @@ public class GlcmAttrs {
     private float entropy=0;
     private float mean=0;
     
+    public GlcmAttrs(float energy, float contrast, float homogenity, float IDM,
+            float entropy, float mean) {
+        this.IDM = IDM;
+        this.energy = energy;
+        this.contrast = contrast;
+        this.homogenity = homogenity;
+        this.entropy = entropy;
+        this.mean = mean;
+    }
+    
+    public GlcmAttrs() {}
+    
     public float getEnergy() {
         return energy;
     }
