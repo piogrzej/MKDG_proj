@@ -58,6 +58,30 @@ public class GlcmAttrs {
         return values.get(5);
     }
     
+    public String getEnergyAsString() {
+        return "Energy: "+values.get(0);
+    }
+
+    public String getContrastAsString() {
+        return "Contrast: "+values.get(1);
+    }
+
+    public String getHomogenityAsString() {
+        return "Homogenity: "+values.get(2);
+    }
+
+    public String getIDMAsString() {
+        return "IDM: "+values.get(3);
+    }
+
+    public String getEntropyAsString() {
+        return "Entropy: "+values.get(4);
+    }
+
+    public String getMeanAsString() {
+        return "Mean: "+values.get(5);
+    }
+    
     public ArrayList<Double> getValuesList() {
         return values;
     }
