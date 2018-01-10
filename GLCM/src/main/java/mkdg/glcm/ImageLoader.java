@@ -13,7 +13,7 @@ public class ImageLoader {
         return Imgcodecs.imread(file.getAbsolutePath(), Imgcodecs.CV_LOAD_IMAGE_GRAYSCALE);
     }
 
-    public static Image ToBufferedImage(Mat m){
+    public static BufferedImage ToBufferedImage(Mat m){
         int type = BufferedImage.TYPE_BYTE_GRAY;
         if ( m.channels() > 1 ) {
             type = BufferedImage.TYPE_3BYTE_BGR;

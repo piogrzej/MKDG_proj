@@ -35,13 +35,10 @@ public class MainForm extends javax.swing.JFrame {
     private void loadImage() {                
         File file = new File("img1.jpg");
         BufferedImage img;
-        /*Mat mt = ImageLoader.LoadImage(file);/**/
-        try {            
-            img = ImageIO.read(file);
-            jLabel1.setIcon(new ImageIcon(img.getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_FAST)));
-        } catch (IOException ex) {
-            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        Mat mt = ImageLoader.LoadImage(file);
+        img = ImageLoader.ToBufferedImage(mt);//ImageIO.read(file);
+        jLabel1.setIcon(new ImageIcon(img.getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_FAST)));
 
     }
 
