@@ -28,21 +28,21 @@ public class GLCMparser {
     private int y_poss;
     
     //wyliczone wspolczynniki
-    private float energy=0;
-    private float contrast=0;
-    private float homogenity=0;
-    private float IDM=0;
-    private float entropy=0;
-    private float mean=0;
+    private double contrast=0;
+    private double energy=0;
+    private double entropy=0;
+    private double homogenity=0;
+    private double IDM=0;//inverse diffrence moment
+    private double mean=0;
     
     private void resetValues()
     {
-        this.energy = 0.0f;
-        this.contrast = 0.0f;
-        this.homogenity = 0.0f;
-        this.IDM = 0.0f;//inverse diffrence moment
-        this.energy = 0.0f;
-        this.mean = 0.0f;
+        this.energy = 0;
+        this.contrast = 0;
+        this.homogenity = 0;
+        this.IDM = 0;
+        this.entropy = 0;
+        this.mean = 0;
     }
     
     private int getStartX()
@@ -111,7 +111,7 @@ public class GLCMparser {
         for(int y=0;y<rows;y++)
             for(int x=0;x<cols;x++)
             {
-                float value = (float)gl.get(y, x)[0];
+                double value = gl.get(y, x)[0];
                 
                 energy += value*value;
                 contrast += (x-y)*(x-y)*value;
@@ -143,27 +143,27 @@ public class GLCMparser {
         this.y_poss = y;
     }
 
-    public float getEnergy() {
+    public double getEnergy() {
         return energy;
     }
 
-    public float getContrast() {
+    public double getContrast() {
         return contrast;
     }
 
-    public float getHomogenity() {
+    public double getHomogenity() {
         return homogenity;
     }
 
-    public float getIDM() {
+    public double getIDM() {
         return IDM;
     }
 
-    public float getEntropy() {
+    public double getEntropy() {
         return entropy;
     }
 
-    public float getMean() {
+    public double getMean() {
         return mean;
     }
     

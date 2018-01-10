@@ -12,10 +12,11 @@ import java.util.ArrayList;
  * @author z
  */
 public class GlcmAttrs {
-    private ArrayList<Float> values = new ArrayList<>();
     
-    public GlcmAttrs(float energy, float contrast, float homogenity, float IDM,
-            float entropy, float mean) {
+    private ArrayList<Double> values = new ArrayList<>();
+    
+    public GlcmAttrs(double energy, double contrast, double homogenity, double IDM,
+            double entropy, double mean) {
         values.add(energy);
         values.add(contrast);
         values.add(homogenity);
@@ -25,49 +26,51 @@ public class GlcmAttrs {
     }
     
     public GlcmAttrs() {
-        values.add(0.f);
-        values.add(0.f);
-        values.add(0.f);
-        values.add(0.f);
-        values.add(0.f);
-        values.add(0.f);
+        values.add(0.0);
+        values.add(0.0);
+        values.add(0.0);
+        values.add(0.0);
+        values.add(0.0);
+        values.add(0.0);
     }
     
-    public float getEnergy() {
+    public double getEnergy() {
         return values.get(0);
     }
 
-    public float getContrast() {
+    public double getContrast() {
         return values.get(1);
     }
 
-    public float getHomogenity() {
+    public double getHomogenity() {
         return values.get(2);
     }
 
-    public float getIDM() {
+    public double getIDM() {
         return values.get(3);
     }
 
-    public float getEntropy() {
+    public double getEntropy() {
         return values.get(4);
     }
 
-    public float getMean() {
+    public double getMean() {
         return values.get(5);
     }
     
-    public ArrayList<Float> getValuesList() {
+    public ArrayList<Double> getValuesList() {
         return values;
     }
     
     @Override
     public String toString() {
         StringBuilder stb = new StringBuilder();
-        for(Float f : values) {
+        values.stream().map((f) -> {
             stb.append(f);
+            return f;
+        }).forEachOrdered((_item) -> {
             stb.append(" ");
-        }
+        });
         return stb.toString();
     }
 }
