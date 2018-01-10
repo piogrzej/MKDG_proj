@@ -121,7 +121,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
             }
         });
 
-        jTextField1.setText("jTextField1");
+        jTextField1.setText("Category Name");
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Cat Name");
