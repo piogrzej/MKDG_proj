@@ -24,10 +24,17 @@ public class JLabelMouse extends JLabel implements MouseMotionListener {
     private int my = 0;
     private int sx = 100;
     private int sy = 100;
+    private int imageSizeX = 1;
+    private int imageSizeY = 1;
     
     public void setMarkerSize(int x, int y) {
         sx = x;
         sy = y;
+    }
+    
+    public void setImageSize(int x, int y) {
+        imageSizeX = x;
+        imageSizeY = y;
     }
     
 
