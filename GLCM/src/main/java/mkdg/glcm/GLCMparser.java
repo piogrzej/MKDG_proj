@@ -40,9 +40,45 @@ public class GLCMparser {
         this.energy = 0.0f;
         this.contrast = 0.0f;
         this.homogenity = 0.0f;
-        this.IDM = 0.0f;
+        this.IDM = 0.0f;//inverse diffrence moment
         this.energy = 0.0f;
         this.mean = 0.0f;
+    }
+    
+    private int getStartX()
+    {
+        int x = (x_poss - (x_size/2));
+        x = (x>0) ? x : 0;
+        
+        return x;
+    }
+    
+    private int getStartY()
+    {
+        int y = (y_poss - (y_size/2));
+        y = (y>0) ? y : 0;
+        
+        return y;
+    }
+    
+    private int getRowCount()
+    {
+        int startY = getStartY();
+        int rowsCount = img.rows();
+        int y = (y_poss + (y_size/2));
+        int rows = (y<rowsCount) ? (y-startY) : (rowsCount-startY);
+        
+        return rows;
+    }
+    
+    private int getColumnCount()
+    {
+        int startX = getStartX();
+        int colsCount = img.cols();
+        int x = (x_poss + (x_size/2));
+        int cols = (x<colsCount) ? (x-startX) : (colsCount-startX);
+        
+        return cols;
     }
     
     public void pars()
@@ -52,13 +88,14 @@ public class GLCMparser {
         Mat gl = Mat.zeros(GRAY_LEVELS, GRAY_LEVELS, CvType.CV_64F);
         Mat glt = gl.clone();
         
-        int rows = y_size, cols = x_size;
+        int rows = getRowCount(), cols = getColumnCount();
+        int startX = getStartX(), startY = getStartY();
         
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols-1; x++) {
 
-                int i = (int) img.get(y_poss + y, x_poss + x)[0];
-                int j = (int) img.get(y_poss + y, x_poss + x + 1)[0];
+                int i = (int) img.get(startY + y, startX + x)[0];
+                int j = (int) img.get(startY + y, startX + x + 1)[0];
 
                 double[] count = gl.get(i, j);
                 count[0]++;
@@ -71,8 +108,8 @@ public class GLCMparser {
         Scalar sum = Core.sumElems(gl);
         Core.divide(gl, sum, gl);
         
-        for(int y=0;y<y_size;y++)
-            for(int x=0;x<x_size;x++)
+        for(int y=0;y<rows;y++)
+            for(int x=0;x<cols;x++)
             {
                 float value = (float)gl.get(y, x)[0];
                 
