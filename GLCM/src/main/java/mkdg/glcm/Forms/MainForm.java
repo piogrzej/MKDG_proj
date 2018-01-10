@@ -43,7 +43,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
         imageMat = ImageLoader.LoadImage(file);
         img = ImageLoader.ToBufferedImage(imageMat);//ImageIO.read(file);
         jLabel1.setIcon(new ImageIcon(img.getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_FAST)));
-
+        knownClasses.clear();
     }
 
     /**
@@ -182,8 +182,8 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
        GLCMparser glcm = new GLCMparser();
        glcm.setX_poss(e.getX()*imageMat.width()/jLabel1.getWidth());
        glcm.setY_poss(e.getY()*imageMat.height()/jLabel1.getHeight());
-       glcm.setX_size(50);
-       glcm.setY_size(50);
+       glcm.setX_size(100);
+       glcm.setY_size(100);
        glcm.setImg(imageMat);
        glcm.pars();
        GlcmAttrs attrs = new GlcmAttrs(glcm.getEnergy(), glcm.getContrast(), glcm.getHomogenity(), glcm.getIDM(), glcm.getEntropy(), glcm.getMean());
@@ -223,12 +223,12 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
 
     private void Classify(GlcmAttrs attrs) {
         String minClassName = "";
-        float minDistance = Float.MAX_VALUE;
+        double minDistance = Double.MAX_VALUE;
         for (Map.Entry<String, List<GlcmAttrs>> entry : knownClasses.entrySet()) {
             String className = entry.getKey();
             List<GlcmAttrs> value = entry.getValue();
             for(GlcmAttrs classAttr : value) {
-                float distance = Distance(attrs, classAttr);
+                double distance = Distance(attrs, classAttr);
                 if(distance < minDistance) {
                     minClassName = className;
                     minDistance = distance;
@@ -238,15 +238,15 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
         System.out.println(minClassName);
     }
     
-    private float Distance(GlcmAttrs attrs1, GlcmAttrs attrs2) {
-        ArrayList<Float> attrsA = attrs1.getValuesList();
-        ArrayList<Float> attrsB = attrs2.getValuesList();
-        float distance = 0;
+    private double Distance(GlcmAttrs attrs1, GlcmAttrs attrs2) {
+        ArrayList<Double> attrsA = attrs1.getValuesList();
+        ArrayList<Double> attrsB = attrs2.getValuesList();
+        double distance = 0;
         for(int i=0; i<attrsA.size(); i++) {
-            float a = attrsA.get(i);
-            float b = attrsB.get(i);
+            double a = attrsA.get(i);
+            double b = attrsB.get(i);
             distance += b*b - a*a;
         }
-        return (float) Math.sqrt(distance);
+        return Math.sqrt(distance);
     }
 }
