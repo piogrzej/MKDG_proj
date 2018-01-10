@@ -3,7 +3,9 @@ package mkdg.glcm;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 
+
 import java.io.File;
+import java.net.URL;
 
 public class Main {
     static {
@@ -12,10 +14,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-
         File file = new File("img1.jpg");
         Mat mt = ImageLoader.LoadImage(file);
-        return;
     }
-
 }
