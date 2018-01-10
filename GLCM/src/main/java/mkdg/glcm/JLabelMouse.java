@@ -37,8 +37,8 @@ public class JLabelMouse extends JLabel implements MouseMotionListener {
     public void setImageSize(int x, int y) {
         imageSizeX = x;
         imageSizeY = y;
-        ratiox = imageSizeX/this.getWidth();
-        ratioy = imageSizeY/this.getHeight();
+        ratiox = (float)imageSizeX/this.getWidth();
+        ratioy = (float)imageSizeY/this.getHeight();
     }
     
 

@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import mkdg.glcm.GLCMparser;
 import mkdg.glcm.GlcmAttrs;
 import mkdg.glcm.ImageLoader;
@@ -180,7 +181,10 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JFileChooser fc = new JFileChooser();
+        String userDir = System.getProperty("user.home");        
+        JFileChooser fc = new JFileChooser(userDir +"/Desktop");          
+        fc.setAcceptAllFileFilterUsed(false);
+        fc.addChoosableFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "gif", "bmp"));
         int returnVal = fc.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             loadImage(fc.getSelectedFile());
