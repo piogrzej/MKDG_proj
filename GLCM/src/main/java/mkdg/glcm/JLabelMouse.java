@@ -62,4 +62,14 @@ public class JLabelMouse extends JLabel implements MouseMotionListener {
         g.drawRect((int) ((mx*ratiox - sx/2)/ratiox), (int)((my*ratioy - sy/2)/ratioy), (int)(sx/ratiox), (int)(sy/ratioy));
         Graphics2D g2 = (Graphics2D) g;
     }
+
+    public int getSx() {
+        return sx;
+    }
+
+    public int getSy() {
+        return sy;
+    }
+    
+    
 }

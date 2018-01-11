@@ -39,6 +39,9 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
      * Creates new form MainForm
      */
     public MainForm() {
+        
+        this.setTitle("MKDG - GLCM");
+        
         initComponents();
         jLabel1.addMouseListener((MouseListener) this);
         jLabel1.addMouseMotionListener(jLabel1);
@@ -316,8 +319,8 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
        GLCMparser glcm = new GLCMparser();
        glcm.setX_poss(e.getX()*imageMat.width()/jLabel1.getWidth());
        glcm.setY_poss(e.getY()*imageMat.height()/jLabel1.getHeight());
-       glcm.setX_size(Integer.parseInt(jTextField2.getText()));
-       glcm.setY_size(Integer.parseInt(jTextField3.getText()));
+       glcm.setX_size(jLabel1.getSx());
+       glcm.setY_size(jLabel1.getSy());
        glcm.setImg(imageMat);
        glcm.pars();
        GlcmAttrs attrs = new GlcmAttrs(glcm.getEnergy(), glcm.getContrast(), glcm.getHomogenity(), glcm.getIDM(), glcm.getEntropy(), glcm.getMean());
