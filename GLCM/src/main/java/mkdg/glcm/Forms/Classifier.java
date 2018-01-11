@@ -75,7 +75,7 @@ public final class Classifier {
                 String className = entry.getKey();
                 List<GlcmAttrs> value = entry.getValue();
                 for(GlcmAttrs classAttr : value) {
-                    printWriter.println(className + classAttr.toString().replaceAll("\\s+",";"));
+                    printWriter.println(className + ";" + classAttr.toString().replaceAll("\\s+",";"));
                 }            
             }
             printWriter.flush();
