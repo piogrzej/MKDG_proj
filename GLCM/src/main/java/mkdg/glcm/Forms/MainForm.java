@@ -33,8 +33,8 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
 
     private Mat imageMat;
     private BufferedImage img;
-    
-    Map<String, List<GlcmAttrs>> knownClasses = new HashMap<>();
+    private Classifier classifier = new Classifier();
+        
     /**
      * Creates new form MainForm
      */
@@ -76,7 +76,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
         imageMat = ImageLoader.LoadImage(file);
         img = ImageLoader.ToBufferedImage(imageMat);//ImageIO.read(file);
         jLabel1.setIcon(new ImageIcon(img.getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_FAST)));
-        knownClasses.clear();
+        classifier.Clear();
 
         jLabel1.setImageSize(img.getWidth(), img.getHeight());
         //sizeLabel.setText("Image size: "+img.getWidth() + "x" + img.getHeight());
@@ -333,9 +333,9 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
        this.meanLabel.setText(attrs.getMeanAsString());
               
        if(checkbox1.getState())
-           AddKnownObject(attrs);
+           classifier.AddKnownObject(attrs, jTextField1.getText());
        else
-           Classify(attrs);
+           System.out.println(classifier.Classify(attrs));
     }
 
     @Override
@@ -356,40 +356,5 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
        
-    }
-
-    private void AddKnownObject(GlcmAttrs attrs) {
-        String key = jTextField1.getText();
-        knownClasses.putIfAbsent(key, new ArrayList<>());
-        knownClasses.get(key).add(attrs);
-    }
-
-    private void Classify(GlcmAttrs attrs) {
-        String minClassName = "";
-        double minDistance = Double.MAX_VALUE;
-        for (Map.Entry<String, List<GlcmAttrs>> entry : knownClasses.entrySet()) {
-            String className = entry.getKey();
-            List<GlcmAttrs> value = entry.getValue();
-            for(GlcmAttrs classAttr : value) {
-                double distance = Distance(attrs, classAttr);
-                if(distance < minDistance) {
-                    minClassName = className;
-                    minDistance = distance;
-                }
-            }            
-        }
-        System.out.println(minClassName);
-    }
-    
-    private double Distance(GlcmAttrs attrs1, GlcmAttrs attrs2) {
-        ArrayList<Double> attrsA = attrs1.getValuesList();
-        ArrayList<Double> attrsB = attrs2.getValuesList();
-        double distance = 0;
-        for(int i=0; i<attrsA.size(); i++) {
-            double a = attrsA.get(i);
-            double b = attrsB.get(i);
-            distance += b*b - a*a;
-        }
-        return Math.sqrt(distance);
     }
 }
