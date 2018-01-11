@@ -108,9 +108,10 @@ public class GLCMparser {
         Scalar sum = Core.sumElems(gl);
         Core.divide(gl, sum, gl);
         
-        for(int y=0;y<rows;y++)
-            for(int x=0;x<cols;x++)
+        for(int y=0;y<GRAY_LEVELS;y++)
+            for(int x=0;x<GRAY_LEVELS;x++)
             {
+                
                 double value = gl.get(y, x)[0];
                 
                 energy += value*value;

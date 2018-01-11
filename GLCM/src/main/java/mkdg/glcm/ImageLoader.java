@@ -3,7 +3,6 @@ package mkdg.glcm;
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.File;

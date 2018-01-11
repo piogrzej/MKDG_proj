@@ -50,7 +50,7 @@
                       <Component id="jTextField3" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="93" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -94,7 +94,7 @@
                       <Component id="meanLabel" min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="131" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

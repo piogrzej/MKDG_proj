@@ -5,14 +5,12 @@
  */
 package mkdg.glcm;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import javax.swing.JLabel;
-import javax.swing.event.MouseInputListener;
 
 /**
  *

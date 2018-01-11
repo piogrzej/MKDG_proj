@@ -60,7 +60,9 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
             }
             
             private void ParseInput() {
-                jLabel1.setMarkerSize(Integer.parseInt(jTextField2.getText()), Integer.parseInt(jTextField3.getText()));
+                
+                if(jTextField2.getText() != null && !jTextField2.getText().isEmpty() && jTextField3.getText() != null && !jTextField3.getText().isEmpty())
+                    jLabel1.setMarkerSize(Integer.parseInt(jTextField2.getText()), Integer.parseInt(jTextField3.getText()));
             }
         };
         jTextField3.getDocument().addDocumentListener(dcl);
@@ -182,7 +184,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField3)))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,7 +222,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
                         .addComponent(idmLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(meanLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         sizeLabel.getAccessibleContext().setAccessibleName("");
