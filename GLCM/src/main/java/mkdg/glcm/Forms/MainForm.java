@@ -5,6 +5,7 @@
  */
 package mkdg.glcm.Forms;
 
+import mkdg.glcm.Classifier;
 import helpers.Point;
 import java.awt.Image;
 import java.awt.event.MouseEvent;

@@ -1,4 +1,4 @@
-package mkdg.glcm.Forms;
+package mkdg.glcm;
 
 import java.io.BufferedReader;
 import java.io.File;
