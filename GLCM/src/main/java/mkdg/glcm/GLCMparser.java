@@ -5,6 +5,8 @@
  */
 package mkdg.glcm;
 
+import helpers.Point;
+import java.util.List;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
@@ -81,7 +83,7 @@ public class GLCMparser {
         return cols;
     }
     
-    public void pars(int xDirection, int yDirection)
+    public void pars(List<Point> directions)
     {
         this.resetValues();
         
@@ -91,19 +93,36 @@ public class GLCMparser {
         int x, y;
         int rows = getRowCount(), cols = getColumnCount();
         int startX = getStartX(), startY = getStartY();
+        int xMin = Integer.MAX_VALUE,xMax=Integer.MIN_VALUE,
+                yMin=Integer.MAX_VALUE,yMax=Integer.MIN_VALUE;
         
-        x = ( xDirection < 0 ) ? Math.abs(xDirection) : 0;
-        y = ( yDirection < 0 ) ? Math.abs(yDirection) : 0;
+        for(Point direction:directions)
+        {
+            if(direction.x>xMax) xMax = direction.x;
+            if(direction.x<xMin) xMin = direction.x;
+            if(direction.y>yMax) yMax = direction.y;
+            if(direction.y<yMin) yMin = direction.y;
+        }
         
-        rows -= (yDirection > 0) ? yDirection : 0;
-        cols -= (xDirection > 0) ? xDirection : 0;
+        x = ( xMin < 0 ) ? Math.abs(xMin) : 0;
+        y = ( yMin < 0 ) ? Math.abs(yMin) : 0;
+        
+        rows -= (yMax > 0) ? yMax : 0;
+        cols -= (xMax > 0) ? xMax : 0;
         
         for (; y < rows; y++) {
             for (; x < cols; x++) {
-
+                
                 int i = (int) img.get(startY + y, startX + x)[0];
-                int j = (int) img.get(startY + y + yDirection, startX + x + xDirection)[0];
+                int j = 0;
+                
+                for(Point direction:directions)
+                {
+                    j += (int) img.get(startY + y + direction.y, startX + x + direction.x)[0];
+                }
 
+                j/=directions.size();
+                
                 double[] count = gl.get(i, j);
                 count[0]++;
                 gl.put(i, j, count);

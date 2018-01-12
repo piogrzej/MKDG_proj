@@ -5,12 +5,15 @@
  */
 package mkdg.glcm.Forms;
 
+import helpers.Point;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -392,7 +395,12 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
        glcm.setX_size(jLabel1.getSx());
        glcm.setY_size(jLabel1.getSy());
        glcm.setImg(imageMat);
-       glcm.pars(1,0);
+       
+       List<Point> directions = new ArrayList();
+       directions.add(new Point(1,0));
+       
+       glcm.pars(directions);
+       
        GlcmAttrs attrs = new GlcmAttrs(glcm.getEnergy(), glcm.getContrast(), glcm.getHomogenity(), glcm.getIDM(), glcm.getEntropy(), glcm.getMean());
        
        this.contrastLabel.setText(attrs.getContrastAsString());

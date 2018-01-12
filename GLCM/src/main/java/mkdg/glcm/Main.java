@@ -1,10 +1,13 @@
 package mkdg.glcm;
 
+import helpers.Point;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     static {
@@ -33,7 +36,10 @@ public class Main {
         parser.setX_size(x_size);
         parser.setY_size(y_size);
         
-        parser.pars(1,0);
+        List<Point> directions = new ArrayList();
+        directions.add(new Point(1,0));
+       
+        parser.pars(directions);
         
         System.out.println(parser.getContrast() + " " + 
                 parser.getEnergy() + " " + 
