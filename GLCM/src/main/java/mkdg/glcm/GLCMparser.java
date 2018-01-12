@@ -83,7 +83,11 @@ public class GLCMparser {
         return cols;
     }
     
-    public void pars(List<Point> directions)
+    public void pars(List<Point> directions) {
+        pars(directions, false);
+    }
+    
+    public void pars(List<Point> directions, boolean printMatrix)
     {
         this.resetValues();
         
@@ -134,6 +138,17 @@ public class GLCMparser {
         Scalar sum = Core.sumElems(gl);
         Core.divide(gl, sum, gl);
         
+        //print teh GLCM
+        if(printMatrix) {
+            for(y=0;y<GRAY_LEVELS/10;y++) {
+                for(x=0;x<GRAY_LEVELS/10;x++)
+                {
+                    System.out.print(" " + gl.get(y, x)[0]);
+                }  
+                System.out.println();
+            }
+        }
+        
         for(y=0;y<GRAY_LEVELS;y++)
             for(x=0;x<GRAY_LEVELS;x++)
             {
@@ -146,8 +161,7 @@ public class GLCMparser {
                 IDM += (y!=x) ? ( value / ((x-y)*(x-y)) ) : 0;
                 entropy -= ( value != 0.0f ) ? value * Math.log10(value) : 0;
                 mean += 0.5*(y*value+x*value);
-            }
-        
+            }        
     }
     
     public void setImg(Mat img) {
