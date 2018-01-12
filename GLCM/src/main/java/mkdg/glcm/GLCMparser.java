@@ -140,8 +140,8 @@ public class GLCMparser {
         
         //print teh GLCM
         if(printMatrix) {
-            for(y=0;y<GRAY_LEVELS/10;y++) {
-                for(x=0;x<GRAY_LEVELS/10;x++)
+            for(y=0;y<GRAY_LEVELS/1;y++) {
+                for(x=0;x<GRAY_LEVELS/1;x++)
                 {
                     System.out.print(" " + gl.get(y, x)[0]);
                 }  
