@@ -18,7 +18,7 @@ import org.opencv.core.Scalar;
  */
 public class GLCMparser {
     
-    private static final int GRAY_LEVELS = 256;
+    private static final int GRAY_LEVELS = 33;
     
     private Mat img;//obrazek
     
@@ -140,8 +140,8 @@ public class GLCMparser {
         
         //print teh GLCM
         if(printMatrix) {
-            for(y=0;y<GRAY_LEVELS/1;y++) {
-                for(x=0;x<GRAY_LEVELS/1;x++)
+            for(y=0;y<GRAY_LEVELS;y++) {
+                for(x=0;x<GRAY_LEVELS;x++)
                 {
                     System.out.print(" " + gl.get(y, x)[0]);
                 }  
