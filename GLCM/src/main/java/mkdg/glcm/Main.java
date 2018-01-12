@@ -33,7 +33,7 @@ public class Main {
         parser.setX_size(x_size);
         parser.setY_size(y_size);
         
-        parser.pars();
+        parser.pars(1,0);
         
         System.out.println(parser.getContrast() + " " + 
                 parser.getEnergy() + " " + 

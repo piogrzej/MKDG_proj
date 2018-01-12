@@ -392,7 +392,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
        glcm.setX_size(jLabel1.getSx());
        glcm.setY_size(jLabel1.getSy());
        glcm.setImg(imageMat);
-       glcm.pars();
+       glcm.pars(1,0);
        GlcmAttrs attrs = new GlcmAttrs(glcm.getEnergy(), glcm.getContrast(), glcm.getHomogenity(), glcm.getIDM(), glcm.getEntropy(), glcm.getMean());
        
        this.contrastLabel.setText(attrs.getContrastAsString());

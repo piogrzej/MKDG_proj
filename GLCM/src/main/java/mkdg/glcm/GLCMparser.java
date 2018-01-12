@@ -81,21 +81,28 @@ public class GLCMparser {
         return cols;
     }
     
-    public void pars()
+    public void pars(int xDirection, int yDirection)
     {
         this.resetValues();
         
         Mat gl = Mat.zeros(GRAY_LEVELS, GRAY_LEVELS, CvType.CV_64F);
         Mat glt = gl.clone();
         
+        int x, y;
         int rows = getRowCount(), cols = getColumnCount();
         int startX = getStartX(), startY = getStartY();
         
-        for (int y = 0; y < rows; y++) {
-            for (int x = 0; x < cols-1; x++) {
+        x = ( xDirection < 0 ) ? Math.abs(xDirection) : 0;
+        y = ( yDirection < 0 ) ? Math.abs(yDirection) : 0;
+        
+        rows -= (yDirection > 0) ? yDirection : 0;
+        cols -= (xDirection > 0) ? xDirection : 0;
+        
+        for (; y < rows; y++) {
+            for (; x < cols; x++) {
 
                 int i = (int) img.get(startY + y, startX + x)[0];
-                int j = (int) img.get(startY + y, startX + x + 1)[0];
+                int j = (int) img.get(startY + y + yDirection, startX + x + xDirection)[0];
 
                 double[] count = gl.get(i, j);
                 count[0]++;
@@ -108,8 +115,8 @@ public class GLCMparser {
         Scalar sum = Core.sumElems(gl);
         Core.divide(gl, sum, gl);
         
-        for(int y=0;y<GRAY_LEVELS;y++)
-            for(int x=0;x<GRAY_LEVELS;x++)
+        for(y=0;y<GRAY_LEVELS;y++)
+            for(x=0;x<GRAY_LEVELS;x++)
             {
                 
                 double value = gl.get(y, x)[0];
