@@ -10,9 +10,9 @@ import org.opencv.core.Core;
 import org.opencv.core.Scalar;
 
 public class ImageLoader {
-    public static Mat LoadImage(File file) {    
+    public static Mat LoadImage(File file,int levels) {    
         Mat gl = Imgcodecs.imread(file.getAbsolutePath(), Imgcodecs.CV_LOAD_IMAGE_GRAYSCALE);
-        Scalar sum = new Scalar(8);
+        Scalar sum = new Scalar(256/levels);
         Core.divide(gl, sum, gl);
         return gl;
     }

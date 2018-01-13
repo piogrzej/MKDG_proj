@@ -16,16 +16,17 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        //wywołanie: program /sciezka/do/pliku/jpg pozycjaX pozycjaY rozmiarX rozmiarY liczbaKierunkow kierunek0x kierunek0y ...
+        //wywołanie: program /sciezka/do/pliku/jpg pozycjaX pozycjaY rozmiarX rozmiarY liczbaOdcieniSzarosci liczbaKierunkow kierunek0x kierunek0y ...
         String pathToImg = args[0];
         int x_poss = Integer.parseInt(args[1]);
         int y_poss = Integer.parseInt(args[2]);
         int x_size = Integer.parseInt(args[3]);
         int y_size = Integer.parseInt(args[4]);
-        int directionsCount = Integer.parseInt(args[5]);
+        int grayLevels = Integer.parseInt(args[5]);
+        int directionsCount = Integer.parseInt(args[6]);
         
         File file = new File(pathToImg);
-        Mat mt = ImageLoader.LoadImage(file);
+        Mat mt = ImageLoader.LoadImage(file,grayLevels);
         
         GLCMparser parser = new GLCMparser();
         
@@ -41,10 +42,10 @@ public class Main {
         
         for(int i=0; i<directionsCount; ++i)
         {
-            directions.add(new Point(Integer.parseInt(args[5+2*i+1]),Integer.parseInt(args[5+2*i+2])));
+            directions.add(new Point(Integer.parseInt(args[6+2*i+1]),Integer.parseInt(args[6+2*i+2])));
         }
        
-        parser.pars(directions);
+        parser.pars(directions,grayLevels);
         
         System.out.println(parser.getContrast() + " " + 
                 parser.getEnergy() + " " + 

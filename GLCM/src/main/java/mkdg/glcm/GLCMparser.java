@@ -18,8 +18,6 @@ import org.opencv.core.Scalar;
  */
 public class GLCMparser {
     
-    private static final int GRAY_LEVELS = 33;
-    
     private Mat img;//obrazek
     
     private int x_size;//rozmiar obszaru w osi X
@@ -83,15 +81,15 @@ public class GLCMparser {
         return cols;
     }
     
-    public void pars(List<Point> directions) {
-        pars(directions, false);
+    public void pars(List<Point> directions, int grayLevels) {
+        pars(directions, grayLevels, false);
     }
     
-    public void pars(List<Point> directions, boolean printMatrix)
+    public void pars(List<Point> directions, int grayLevels, boolean printMatrix)
     {
         this.resetValues();
         
-        Mat gl = Mat.zeros(GRAY_LEVELS, GRAY_LEVELS, CvType.CV_64F);
+        Mat gl = Mat.zeros(grayLevels + 1, grayLevels + 1, CvType.CV_64F);
         Mat glt = gl.clone();
         
         int x, y;
@@ -140,8 +138,8 @@ public class GLCMparser {
         
         //print teh GLCM
         if(printMatrix) {
-            for(y=0;y<GRAY_LEVELS;y++) {
-                for(x=0;x<GRAY_LEVELS;x++)
+            for(y=0;y<grayLevels + 1;y++) {
+                for(x=0;x<grayLevels + 1;x++)
                 {
                     System.out.print(" " + gl.get(y, x)[0]);
                 }  
@@ -149,8 +147,8 @@ public class GLCMparser {
             }
         }
         
-        for(y=0;y<GRAY_LEVELS;y++)
-            for(x=0;x<GRAY_LEVELS;x++)
+        for(y=0;y<grayLevels + 1;y++)
+            for(x=0;x<grayLevels + 1;x++)
             {
                 
                 double value = gl.get(y, x)[0];

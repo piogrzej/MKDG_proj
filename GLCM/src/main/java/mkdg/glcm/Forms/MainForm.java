@@ -8,20 +8,19 @@ package mkdg.glcm.Forms;
 import mkdg.glcm.Classifier;
 import helpers.Point;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.ListModel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -42,6 +41,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
     private Classifier classifier = new Classifier();
     private DefaultListModel listModel = new DefaultListModel();
     private ArrayList<Point> pointsList = new ArrayList<>();
+    private File imgFile = new File("img1.jpg");
         
     /**
      * Creates new form MainForm
@@ -54,6 +54,28 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
         jLabel1.addMouseListener((MouseListener) this);
         jLabel1.addMouseMotionListener(jLabel1);
         jLabel1.setMarkerSize(Integer.parseInt(jTextField2.getText()), Integer.parseInt(jTextField3.getText()));
+        
+        grayLevelsComboBox.removeAllItems();
+        grayLevelsComboBox.addItem("8");
+        grayLevelsComboBox.addItem("16");
+        grayLevelsComboBox.addItem("32");
+        grayLevelsComboBox.addItem("64");
+        grayLevelsComboBox.addItem("128");
+        grayLevelsComboBox.addItem("256");
+        
+        grayLevelsComboBox.setSelectedIndex(2);
+        
+        MainForm mf = this;
+        
+        ActionListener cbActionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                mf.loadImage();
+            }
+        };
+        
+        grayLevelsComboBox.addActionListener(cbActionListener);
+        
         DocumentListener dcl = new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -93,14 +115,13 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
         pointsList.remove(index);
     }
     
-    private void loadImage(File file) {                            
-        imageMat = ImageLoader.LoadImage(file);
+    private void loadImage() {                            
+        imageMat = ImageLoader.LoadImage(this.imgFile,Integer.parseInt((String)grayLevelsComboBox.getSelectedItem()));
         img = ImageLoader.ToBufferedImage(imageMat);//ImageIO.read(file);
         jLabel1.setIcon(new ImageIcon(img.getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_FAST)));
         classifier.Clear();
 
         jLabel1.setImageSize(img.getWidth(), img.getHeight());
-        //sizeLabel.setText("Image size: "+img.getWidth() + "x" + img.getHeight());
         sizeLabel.setText("Image size: "+img.getWidth() + "x" + img.getHeight());
         
         this.contrastLabel.setText("");
@@ -140,6 +161,8 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        grayLevelsComboBox = new javax.swing.JComboBox<>();
+        label1 = new java.awt.Label();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
@@ -208,6 +231,11 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
 
         jLabel4.setText("Marker Size Y");
 
+        grayLevelsComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        label1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        label1.setText("Gray Levels:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -215,7 +243,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(checkBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(checkBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
                     .addComponent(meanLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(idmLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(homogenityLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -224,7 +252,6 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
                     .addComponent(contrastLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(sizeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTextField1)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -234,17 +261,28 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField3))
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(grayLevelsComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1)
+                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(grayLevelsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -343,7 +381,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextFieldPointY, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 21, Short.MAX_VALUE))
+                        .addGap(0, 20, Short.MAX_VALUE))
                     .addComponent(jCheckBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -403,7 +441,8 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
         fc.addChoosableFileFilter(new FileNameExtensionFilter("Images", "jpg", "png", "gif", "bmp"));
         int returnVal = fc.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            loadImage(fc.getSelectedFile());
+            this.imgFile = fc.getSelectedFile();
+            loadImage();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -488,7 +527,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 MainForm mf = new MainForm();
-                mf.loadImage(new File("img1.jpg"));
+                mf.loadImage();
                 mf.setVisible(true);
                 
             }
@@ -500,6 +539,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
     private javax.swing.JLabel contrastLabel;
     private javax.swing.JLabel energyLabel;
     private javax.swing.JLabel entropyLabel;
+    private javax.swing.JComboBox<String> grayLevelsComboBox;
     private javax.swing.JLabel homogenityLabel;
     private javax.swing.JLabel idmLabel;
     private javax.swing.JButton jButton1;
@@ -524,6 +564,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextFieldPointX;
     private javax.swing.JTextField jTextFieldPointY;
+    private java.awt.Label label1;
     private javax.swing.JLabel meanLabel;
     private javax.swing.JLabel sizeLabel;
     // End of variables declaration//GEN-END:variables
@@ -539,9 +580,9 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
        glcm.setImg(imageMat);
                      
        if(this.jCheckBox2.isSelected())
-           glcm.pars(pointsList, true);
+           glcm.pars(pointsList,Integer.parseInt((String)grayLevelsComboBox.getSelectedItem()), true);
        else
-           glcm.pars(pointsList);
+           glcm.pars(pointsList,Integer.parseInt((String)grayLevelsComboBox.getSelectedItem()));
        
        GlcmAttrs attrs = new GlcmAttrs(glcm.getEnergy(), glcm.getContrast(), glcm.getHomogenity(), glcm.getIDM(), glcm.getEntropy(), glcm.getMean());
        
