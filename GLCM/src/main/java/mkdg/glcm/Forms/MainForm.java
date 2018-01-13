@@ -56,6 +56,8 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
         jLabel1.setMarkerSize(Integer.parseInt(jTextField2.getText()), Integer.parseInt(jTextField3.getText()));
         
         grayLevelsComboBox.removeAllItems();
+        grayLevelsComboBox.addItem("2");
+        grayLevelsComboBox.addItem("4");
         grayLevelsComboBox.addItem("8");
         grayLevelsComboBox.addItem("16");
         grayLevelsComboBox.addItem("32");
@@ -63,7 +65,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
         grayLevelsComboBox.addItem("128");
         grayLevelsComboBox.addItem("256");
         
-        grayLevelsComboBox.setSelectedIndex(2);
+        grayLevelsComboBox.setSelectedIndex(4);
         
         MainForm mf = this;
         
@@ -580,9 +582,9 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
        glcm.setImg(imageMat);
                      
        if(this.jCheckBox2.isSelected())
-           glcm.pars(pointsList,Integer.parseInt((String)grayLevelsComboBox.getSelectedItem()), true);
+           glcm.pars(pointsList, true);
        else
-           glcm.pars(pointsList,Integer.parseInt((String)grayLevelsComboBox.getSelectedItem()));
+           glcm.pars(pointsList);
        
        GlcmAttrs attrs = new GlcmAttrs(glcm.getEnergy(), glcm.getContrast(), glcm.getHomogenity(), glcm.getIDM(), glcm.getEntropy(), glcm.getMean());
        

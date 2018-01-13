@@ -45,7 +45,7 @@ public class Main {
             directions.add(new Point(Integer.parseInt(args[6+2*i+1]),Integer.parseInt(args[6+2*i+2])));
         }
        
-        parser.pars(directions,grayLevels);
+        parser.pars(directions);
         
         System.out.println(parser.getContrast() + " " + 
                 parser.getEnergy() + " " + 

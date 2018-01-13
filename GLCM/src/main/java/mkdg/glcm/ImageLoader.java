@@ -10,10 +10,20 @@ import org.opencv.core.Core;
 import org.opencv.core.Scalar;
 
 public class ImageLoader {
+    
     public static Mat LoadImage(File file,int levels) {    
         Mat gl = Imgcodecs.imread(file.getAbsolutePath(), Imgcodecs.CV_LOAD_IMAGE_GRAYSCALE);
-        Scalar sum = new Scalar(256/levels);
-        Core.divide(gl, sum, gl);
+        //changing of grayscale
+        if(256!=levels)
+        {
+            Scalar div = new Scalar(256/levels);
+            Scalar two = new Scalar(0.5);
+            Core.divide(gl, div, gl);
+            Core.multiply(gl, div, gl);
+            div.mul(two);
+            Core.add(gl, div, gl);
+        }
+        
         return gl;
     }
 
