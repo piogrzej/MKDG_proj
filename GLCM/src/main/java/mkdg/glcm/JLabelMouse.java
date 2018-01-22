@@ -31,6 +31,8 @@ public class JLabelMouse extends JLabel implements MouseMotionListener {
     private float ratiox = 1.f;
     private float ratioy = 1.f;
     
+    private Color col=null;
+    
     private ArrayList<Rectangle> areas = new ArrayList<>();
     private ArrayList<Color> rectangles = new ArrayList<>();
     
@@ -72,8 +74,10 @@ public class JLabelMouse extends JLabel implements MouseMotionListener {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);        
-        g.setColor(Color.ORANGE);
-        g.setColor(Color.red);                
+        if(null == col)
+            g.setColor(Color.red);                
+        else
+            g.setColor(col);
         g.drawRect((int) ((mx*ratiox - sx/2)/ratiox), (int)((my*ratioy - sy/2)/ratioy), (int)(sx/ratiox), (int)(sy/ratioy));
         
         for(int i=0; i<areas.size(); i++) {
@@ -91,6 +95,10 @@ public class JLabelMouse extends JLabel implements MouseMotionListener {
 
     public int getSy() {
         return sy;
+    }
+
+    public void setMarkerColor(Color color) {
+        this.col = color;
     }
     
     
