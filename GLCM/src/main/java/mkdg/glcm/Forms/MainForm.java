@@ -29,6 +29,8 @@ import mkdg.glcm.GlcmAttrs;
 import mkdg.glcm.ImageLoader;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
 
 /**
  *
@@ -104,7 +106,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
         jTextField2.getDocument().addDocumentListener(dcl);        
         jList1.setModel(listModel);
         Point pt = new Point(1, 0); 
-        AddPoint(pt);        
+        AddPoint(pt);
     }
     
     private void AddPoint(Point point) {
@@ -176,6 +178,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jCheckBox2 = new javax.swing.JCheckBox();
+        analyzeBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -360,6 +363,13 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
 
         jCheckBox2.setText("Print GLCM");
 
+        analyzeBtn.setText("Analyze");
+        analyzeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                analyzeBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -369,6 +379,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCheckBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -382,9 +393,9 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldPointY, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 20, Short.MAX_VALUE))
-                    .addComponent(jCheckBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jTextFieldPointY, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(analyzeBtn))
+                        .addGap(0, 20, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -406,6 +417,8 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
                     .addComponent(jLabel6))
                 .addGap(41, 41, 41)
                 .addComponent(jCheckBox2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(analyzeBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -492,6 +505,53 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
         DeletePoint(index);
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void analyzeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analyzeBtnActionPerformed
+        analyzeImage();
+    }//GEN-LAST:event_analyzeBtnActionPerformed
+
+    private void analyzeImage()
+    {
+        
+        int xStep = imageMat.width()/50;
+        int yStep = imageMat.height()/50;
+        int cols = imageMat.width()/xStep;
+        int rows = imageMat.height()/yStep;
+        
+        GLCMparser glcm = new GLCMparser();
+        
+        glcm.setX_size(jLabel1.getSx());
+        glcm.setY_size(jLabel1.getSy());
+        
+        glcm.setImg(imageMat);
+        
+        for(int x=0; x<cols; ++x)
+        {
+            for(int y=0; y<rows; ++y)
+            {
+                int posX = x*xStep*imageMat.width()/jLabel1.getWidth();
+                int posY = y*yStep*imageMat.height()/jLabel1.getHeight();
+                glcm.setX_poss(posX);
+                glcm.setY_poss(posY);
+                glcm.pars(pointsList);
+                GlcmAttrs attrs = new GlcmAttrs(glcm.getEnergy(), glcm.getContrast(), glcm.getHomogenity(), glcm.getIDM(), glcm.getEntropy(), glcm.getMean());
+                String c = classifier.Classify(attrs);
+                if(!c.isEmpty())
+                {
+                    Scalar Detect_Color = new Scalar(0, 255, 0, 255);
+                    System.out.println(c);
+                    Imgproc.rectangle(imageMat,
+                            new org.opencv.core.Point(posX, posY),
+                            new org.opencv.core.Point(posX+jLabel1.getSx(), posY+jLabel1.getSy()),
+                            Detect_Color, 5);
+                    img = ImageLoader.ToBufferedImage(imageMat);
+                    jLabel1.setIcon(new ImageIcon(img.getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_FAST)));
+
+                    jLabel1.setImageSize(img.getWidth(), img.getHeight());
+                }
+            }
+        }
+        
+    }
     
     static {
         nu.pattern.OpenCV.loadShared();
@@ -537,6 +597,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton analyzeBtn;
     private java.awt.Checkbox checkBox1;
     private javax.swing.JLabel contrastLabel;
     private javax.swing.JLabel energyLabel;

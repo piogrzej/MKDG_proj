@@ -17,6 +17,9 @@ import mkdg.glcm.GlcmAttrs;
  * @author z
  */
 public final class Classifier {
+    
+    private static final double CLASSIFICATION_MIN = 20;
+    
     private Map<String, List<GlcmAttrs>> knownClasses = new HashMap<>();
     
     public Classifier() {
@@ -65,7 +68,11 @@ public final class Classifier {
                 }
             }            
         }
-        return minClassName;
+        
+        if(minDistance < CLASSIFICATION_MIN)
+            return minClassName;
+        else
+            return "";
     }
     
     public void Serialize(File file) throws IOException {
