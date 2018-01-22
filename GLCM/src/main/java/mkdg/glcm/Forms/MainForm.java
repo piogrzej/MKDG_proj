@@ -126,8 +126,8 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
         colors[11] = new Color(0, 125, 255);
         colors[12] = new Color(125, 125, 255);        
         colors[13] = new Color(255, 125, 125);
-        colors[14] = new Color(0, 125, 125);
-        colors[15] = new Color(125, 0, 255);     
+        colors[14] = new Color(255, 255, 255);
+        colors[15] = new Color(0, 0, 0);     
         
         //Marker colors
         DocumentListener dcl2 = new DocumentListener() {
@@ -149,7 +149,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
             private void ParseInput() {
                 
                 if(jTextField1.getText() != null && !jTextField1.getText().isEmpty())
-                    jLabel1.setMarkerColor(colors[jTextField1.getText().charAt(0)%16]);
+                    jLabel1.setMarkerColor(colors[Math.abs(jTextField1.getText().hashCode()%16)]);
             }
         };
         jTextField1.getDocument().addDocumentListener(dcl2);
@@ -587,7 +587,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
                 {
                     System.out.println(c);                    
                     Rectangle rect = new Rectangle(x*xStep, y*yStep, jLabel1.getSx(), jLabel1.getSy());
-                    jLabel1.AddRectangle(rect, colors[c.charAt(0)%16]);
+                    jLabel1.AddRectangle(rect, colors[Math.abs(jTextField1.getText().hashCode()%16)]);
                 }
                 //draw missed black thingies
                 /*else{
