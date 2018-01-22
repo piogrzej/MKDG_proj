@@ -7,7 +7,9 @@ package mkdg.glcm.Forms;
 
 import mkdg.glcm.Classifier;
 import helpers.Point;
+import java.awt.Color;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -44,7 +46,8 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
     private DefaultListModel listModel = new DefaultListModel();
     private ArrayList<Point> pointsList = new ArrayList<>();
     private File imgFile = new File("img1.jpg");
-        
+    private Color[] colors = new Color[16];    
+       
     /**
      * Creates new form MainForm
      */
@@ -107,6 +110,24 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
         jList1.setModel(listModel);
         Point pt = new Point(1, 0); 
         AddPoint(pt);
+        
+        //colors for classifier
+        colors[0] = new Color(255, 0, 0);
+        colors[1] = new Color(0, 255, 0);
+        colors[2] = new Color(0, 0, 255);
+        colors[3] = new Color(255, 255, 0);
+        colors[4] = new Color(255, 0, 255);
+        colors[5] = new Color(0, 255, 255);
+        colors[6] = new Color(255, 125, 0);
+        colors[7] = new Color(255, 0, 125);        
+        colors[8] = new Color(0, 255, 125);
+        colors[9] = new Color(125, 255, 125);
+        colors[10] = new Color(125, 0, 255);
+        colors[11] = new Color(0, 125, 255);
+        colors[12] = new Color(125, 125, 255);        
+        colors[13] = new Color(255, 125, 125);
+        colors[14] = new Color(0, 125, 125);
+        colors[15] = new Color(125, 0, 255);     
     }
     
     private void AddPoint(Point point) {
@@ -512,11 +533,11 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
     private void analyzeImage()
     {
         
-        int xStep = imageMat.width()/50;
-        int yStep = imageMat.height()/50;
+        int xStep = jLabel1.getSx();//imageMat.width()/50;
+        int yStep = jLabel1.getSy();//imageMat.height()/50;
         int cols = imageMat.width()/xStep;
         int rows = imageMat.height()/yStep;
-        
+        System.out.println("COLS ROWS: " + cols + " " + rows);
         GLCMparser glcm = new GLCMparser();
         
         glcm.setX_size(jLabel1.getSx());
@@ -537,17 +558,16 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
                 String c = classifier.Classify(attrs);
                 if(!c.isEmpty())
                 {
-                    Scalar Detect_Color = new Scalar(0, 255, 0, 255);
-                    System.out.println(c);
-                    Imgproc.rectangle(imageMat,
-                            new org.opencv.core.Point(posX, posY),
-                            new org.opencv.core.Point(posX+jLabel1.getSx(), posY+jLabel1.getSy()),
-                            Detect_Color, 5);
-                    img = ImageLoader.ToBufferedImage(imageMat);
-                    jLabel1.setIcon(new ImageIcon(img.getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_FAST)));
-
-                    jLabel1.setImageSize(img.getWidth(), img.getHeight());
+                    System.out.println(c);                    
+                    Rectangle rect = new Rectangle(x*xStep, y*yStep, jLabel1.getSx(), jLabel1.getSy());
+                    jLabel1.AddRectangle(rect, colors[c.charAt(0)%16]);
                 }
+                //draw missed black thingies
+                /*else{
+                    Rectangle rect = new Rectangle(posX, posY, jLabel1.getSx(), jLabel1.getSy());
+                    jLabel1.AddRectangle(rect, Color.BLACK);   
+                }/**/
+                    
             }
         }
         
