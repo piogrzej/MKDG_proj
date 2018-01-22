@@ -71,8 +71,7 @@ public class JLabelMouse extends JLabel implements MouseMotionListener {
     
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g;
+        super.paintComponent(g);        
         g.setColor(Color.ORANGE);
         g.setColor(Color.red);                
         g.drawRect((int) ((mx*ratiox - sx/2)/ratiox), (int)((my*ratioy - sy/2)/ratioy), (int)(sx/ratiox), (int)(sy/ratioy));
@@ -80,11 +79,10 @@ public class JLabelMouse extends JLabel implements MouseMotionListener {
         for(int i=0; i<areas.size(); i++) {
             Rectangle r = areas.get(i);
             Color c = rectangles.get(i);
-            g2.setColor(c);
-            //g2.setStroke(new BasicStroke(2));
-            g2.drawRect((int)(r.x/ratiox), (int)(r.y/ratioy), (int)(r.width/ratiox), (int)(r.height/ratioy));
+            g.setColor(c);
+            g.drawRect((int)(r.x/ratiox), (int)(r.y/ratioy), (int)(r.width/ratiox), (int)(r.height/ratioy));
         }
-                
+        Graphics2D g2 = (Graphics2D) g;
     }
 
     public int getSx() {
