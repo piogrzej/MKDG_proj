@@ -558,8 +558,8 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
     private void analyzeImage()
     {
         jLabel1.ClearRectangles();
-        int xStep = imageMat.width()/50;
-        int yStep = imageMat.height()/50;
+        int xStep = imageMat.width()/50 < jLabel1.getSx()/2 ? imageMat.width()/50 : jLabel1.getSx()/2;
+        int yStep = imageMat.height()/50 < jLabel1.getSy()/2 ? imageMat.height()/50 : jLabel1.getSy()/2;
         int cols = imageMat.width()/xStep;
         int rows = imageMat.height()/yStep;
         System.out.println("COLS ROWS: " + cols + " " + rows);
@@ -570,9 +570,9 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
         
         glcm.setImg(imageMat);
         
-        for(int x=0; x<cols; ++x)
+        for(int x=0; x<=cols; ++x)
         {
-            for(int y=0; y<rows; ++y)
+            for(int y=0; y<=rows; ++y)
             {
                 int posX = x*xStep;//*imageMat.width()/jLabel1.getWidth();
                 int posY = y*yStep;//*imageMat.height()/jLabel1.getHeight();
@@ -587,7 +587,7 @@ public class MainForm extends javax.swing.JFrame implements MouseListener {
                 {
                     System.out.println(c);                    
                     Rectangle rect = new Rectangle(x*xStep, y*yStep, jLabel1.getSx(), jLabel1.getSy());
-                    jLabel1.AddRectangle(rect, colors[Math.abs(jTextField1.getText().hashCode()%16)]);
+                    jLabel1.AddRectangle(rect, colors[Math.abs(c.hashCode()%16)]);
                 }
                 //draw missed black thingies
                 /*else{
